@@ -2,6 +2,7 @@
 
 A professional and elegant website for listing jobs, internships, and technical events with a modern design using the color palette: **Black**, **Vibrant Green**, and **Light Green/Off-White**.
 
+
 ## 🎨 Design Features
 
 - **Elegant Color Scheme**: Uses the sophisticated color palette from the image
