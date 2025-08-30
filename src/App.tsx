@@ -27,11 +27,6 @@ function App() {
     loadOpportunities();
   }, []);
 
-  // Filter opportunities when filter or search changes
-  useEffect(() => {
-    filterOpportunities();
-  }, [filterOpportunities]);
-
   const loadOpportunities = async () => {
     try {
       setIsLoading(true);
@@ -72,6 +67,11 @@ function App() {
 
     setFilteredOpportunities(filtered);
   }, [currentFilter, searchTerm, opportunities]);
+
+  // Filter opportunities when filter or search changes
+  useEffect(() => {
+    filterOpportunities();
+  }, [filterOpportunities]);
 
   const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
