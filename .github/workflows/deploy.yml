@@ -37,6 +37,14 @@ jobs:
           export REACT_APP_ENVIRONMENT=production
           npm run build
         
+      - name: Prepare for deployment
+        run: |
+          cd build
+          # Create .nojekyll file to disable Jekyll processing
+          touch .nojekyll
+          # Ensure proper file structure
+          ls -la
+        
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         if: github.ref == 'refs/heads/main'
