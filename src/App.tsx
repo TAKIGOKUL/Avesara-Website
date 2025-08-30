@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -8,7 +8,7 @@ import Community from './components/Community';
 import About from './components/About';
 import Footer from './components/Footer';
 import PostAlertModal from './components/PostAlertModal';
-import { Theme, Opportunity, PostAlertFormData } from './types';
+import { Theme, PostAlertFormData } from './types';
 import googleSheetsService, { ProcessedOpportunity } from './services/googleSheetsService';
 import './App.css';
 
@@ -30,7 +30,7 @@ function App() {
   // Filter opportunities when filter or search changes
   useEffect(() => {
     filterOpportunities();
-  }, [currentFilter, searchTerm, opportunities]);
+  }, [filterOpportunities]);
 
   const loadOpportunities = async () => {
     try {
@@ -52,7 +52,7 @@ function App() {
     }
   };
 
-  const filterOpportunities = () => {
+  const filterOpportunities = useCallback(() => {
     let filtered = opportunities;
 
     // Filter by type
@@ -71,7 +71,7 @@ function App() {
     }
 
     setFilteredOpportunities(filtered);
-  };
+  }, [currentFilter, searchTerm, opportunities]);
 
   const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
