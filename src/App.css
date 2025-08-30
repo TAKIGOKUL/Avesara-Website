@@ -1,38 +1,305 @@
+/* CSS Variables for Color Palette */
+:root {
+  --black: #2c2c2c;
+  --vibrant-green: #ff6b35;
+  --light-green: #f8f4f0;
+  --white: #fefefe;
+  --gray: #6b6b6b;
+  --light-gray: #f5f5f5;
+  --border-color: #e8e0d8;
+  --shadow: 0 4px 20px rgba(44, 44, 44, 0.08);
+  --shadow-hover: 0 8px 30px rgba(44, 44, 44, 0.12);
+  --gradient-primary: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+  --gradient-secondary: linear-gradient(135deg, #ff8a65 0%, #ff7043 100%);
+  --gradient-accent: linear-gradient(135deg, #ffb74d 0%, #ffa726 100%);
+  --gradient-success: linear-gradient(135deg, #81c784 0%, #66bb6a 100%);
+  --gradient-warning: linear-gradient(135deg, #ffcc02 0%, #ffb300 100%);
+  --cream-bg: #fefefe;
+  --cream-light: #f8f4f0;
+  --cream-lighter: #f5f1ed;
+  --cream-border: #e8e0d8;
+  --cream-text: #2c2c2c;
+  --cream-muted: #6b6b6b;
+}
+
+/* Dark Theme Variables */
+[data-theme="dark"] {
+  --black: #ffffff;
+  --white: #1a1a1a;
+  --light-green: #2a2a2a;
+  --light-gray: #333333;
+  --border-color: #444444;
+  --gray: #cccccc;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.4);
+  --vibrant-green: #ff6b35;
+  --gradient-primary: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+  --gradient-secondary: linear-gradient(135deg, #ff8a65 0%, #ff7043 100%);
+  --gradient-accent: linear-gradient(135deg, #ffb74d 0%, #ffa726 100%);
+  --gradient-success: linear-gradient(135deg, #81c784 0%, #66bb6a 100%);
+  --gradient-warning: linear-gradient(135deg, #ffcc02 0%, #ffb300 100%);
+  --cream-bg: #1a1a1a;
+  --cream-light: #2a2a2a;
+  --cream-lighter: #333333;
+  --cream-border: #444444;
+  --cream-text: #ffffff;
+  --cream-muted: #cccccc;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  color: var(--cream-text);
+  background-color: var(--cream-bg);
+  transition: all 0.3s ease;
+  overflow-x: hidden;
+}
+
 .App {
+  min-height: 100vh;
+  background: var(--cream-bg);
+}
+
+/* Global Button Styles */
+.btn {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
   text-align: center;
+  font-size: 1rem;
+  position: relative;
+  overflow: hidden;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.btn:hover::before {
+  left: 100%;
+}
+
+.btn-primary {
+  background: var(--gradient-primary);
+  color: var(--white);
+  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 107, 53, 0.6);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--vibrant-green);
+  border: 2px solid var(--vibrant-green);
+  position: relative;
+  z-index: 1;
+}
+
+.btn-secondary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: var(--gradient-primary);
+  transition: width 0.3s ease;
+  z-index: -1;
+}
+
+.btn-secondary:hover::before {
+  width: 100%;
+}
+
+.btn-secondary:hover {
+  color: var(--white);
+  border-color: transparent;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--cream-light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gradient-primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gradient-secondary);
+}
+
+/* Selection Styling */
+::selection {
+  background: var(--vibrant-green);
+  color: var(--white);
+}
+
+/* Focus Styles */
+*:focus {
+  outline: 2px solid var(--vibrant-green);
+  outline-offset: 2px;
+}
+
+/* Loading Animation */
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.loading {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
 }
 
-.App-link {
-  color: #61dafb;
+/* Responsive Design */
+@media (max-width: 768px) {
+  .btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+  }
 }
 
-@keyframes App-logo-spin {
+@media (max-width: 480px) {
+  .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* Utility Classes */
+.text-gradient {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.bg-gradient {
+  background: var(--gradient-primary);
+}
+
+.shadow-soft {
+  box-shadow: 0 10px 30px rgba(44, 44, 44, 0.08);
+}
+
+.shadow-strong {
+  box-shadow: 0 20px 40px rgba(44, 44, 44, 0.12);
+}
+
+.rounded-full {
+  border-radius: 50%;
+}
+
+.rounded-lg {
+  border-radius: 15px;
+}
+
+.rounded-xl {
+  border-radius: 20px;
+}
+
+/* Animation Classes */
+.fade-in {
+  animation: fadeIn 0.6s ease-in;
+}
+
+.slide-up {
+  animation: slideUp 0.6s ease-out;
+}
+
+.scale-in {
+  animation: scaleIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
   }
   to {
-    transform: rotate(360deg);
+    opacity: 1;
   }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Glassmorphism Effect */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .glass {
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Improved Light Room */
+.light-room {
+  background: linear-gradient(135deg, 
+    rgba(254, 254, 254, 0.9) 0%, 
+    rgba(248, 244, 240, 0.8) 50%, 
+    rgba(254, 254, 254, 0.7) 100%);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 107, 53, 0.2);
+}
+
+[data-theme="dark"] .light-room {
+  background: linear-gradient(135deg, 
+    rgba(26, 26, 26, 0.9) 0%, 
+    rgba(42, 42, 42, 0.8) 50%, 
+    rgba(26, 26, 26, 0.7) 100%);
+  border: 1px solid rgba(255, 107, 53, 0.3);
 }

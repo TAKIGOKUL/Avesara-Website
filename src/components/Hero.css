@@ -1,0 +1,281 @@
+.hero {
+  padding: 8rem 2rem 4rem;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--cream-bg);
+}
+
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  transition: all 0.3s ease;
+}
+
+.hero-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-content h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  color: var(--cream-muted);
+  margin-bottom: 2rem;
+  line-height: 1.8;
+  max-width: 500px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.hero-image {
+  position: relative;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-graphic {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.floating-card {
+  position: absolute;
+  background: var(--cream-bg);
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 107, 53, 0.2);
+}
+
+.floating-card:nth-child(1) {
+  top: 20px;
+  left: 20px;
+  animation-delay: 0s;
+}
+
+.floating-card:nth-child(2) {
+  top: 150px;
+  right: 50px;
+  animation-delay: 2s;
+}
+
+.floating-card:nth-child(3) {
+  bottom: 50px;
+  left: 100px;
+  animation-delay: 4s;
+}
+
+.card-icon {
+  font-size: 3rem;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.floating-card span {
+  font-weight: 600;
+  color: var(--cream-text);
+  font-size: 1.1rem;
+}
+
+/* Interactive particles */
+.particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--vibrant-green);
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero {
+    padding: 6rem 1rem 2rem;
+  }
+  
+  .hero-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2rem;
+  }
+  
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+  
+  .hero-content p {
+    font-size: 1.1rem;
+    margin: 0 auto 2rem;
+  }
+  
+  .hero-buttons {
+    justify-content: center;
+  }
+  
+  .hero-image {
+    height: 300px;
+  }
+  
+  .floating-card {
+    padding: 1.5rem;
+  }
+  
+  .card-icon {
+    font-size: 2rem;
+  }
+  
+  .floating-card span {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 5rem 1rem 1rem;
+  }
+  
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+  
+  .hero-content p {
+    font-size: 1rem;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .btn {
+    width: 100%;
+    max-width: 250px;
+  }
+  
+  .hero-image {
+    height: 250px;
+  }
+  
+  .floating-card {
+    padding: 1rem;
+  }
+  
+  .card-icon {
+    font-size: 1.5rem;
+  }
+}
+
+/* Enhanced animations for floating cards */
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg); 
+  }
+  50% { 
+    transform: translateY(-20px) rotate(2deg); 
+  }
+}
+
+.floating-card {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Mouse interaction effects */
+.hero:hover .floating-card {
+  filter: brightness(1.05);
+}
+
+.floating-card:hover {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 20px 40px rgba(255, 107, 53, 0.3);
+  z-index: 10;
+  border-color: rgba(255, 107, 53, 0.4);
+}
+
+/* Gradient overlay for better text readability */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(254, 254, 254, 0.1) 0%,
+    rgba(248, 244, 240, 0.05) 50%,
+    rgba(254, 254, 254, 0.1) 100%
+  );
+  z-index: 0;
+  pointer-events: none;
+}
+
+[data-theme="dark"] .hero::before {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(42, 42, 42, 0.05) 50%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+}
+
+/* Dark theme specific adjustments */
+[data-theme="dark"] .hero {
+  background: var(--cream-bg);
+}
+
+[data-theme="dark"] .floating-card {
+  background: var(--cream-light);
+  border-color: rgba(255, 107, 53, 0.3);
+}
+
+[data-theme="dark"] .floating-card span {
+  color: var(--cream-text);
+}

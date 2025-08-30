@@ -1,0 +1,339 @@
+.filter-section {
+  padding: 2rem;
+  background: var(--cream-bg);
+  border-bottom: 1px solid var(--cream-border);
+  position: relative;
+  overflow: hidden;
+}
+
+.filter-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, 
+    rgba(255, 107, 53, 0.02) 0%, 
+    rgba(255, 151, 30, 0.02) 100%);
+  pointer-events: none;
+}
+
+.filter-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.filter-tabs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-tab {
+  padding: 0.75rem 1.5rem;
+  border: 2px solid var(--cream-border);
+  background: transparent;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  font-size: 0.9rem;
+  position: relative;
+  overflow: hidden;
+  color: var(--cream-text);
+}
+
+.filter-tab::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: var(--gradient-primary);
+  transition: width 0.3s ease;
+  z-index: -1;
+}
+
+.filter-tab.active::before,
+.filter-tab:hover::before {
+  width: 100%;
+}
+
+.filter-tab.active,
+.filter-tab:hover {
+  border-color: transparent;
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+}
+
+.filter-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  background: var(--cream-light);
+  border-radius: 25px;
+  padding: 0.5rem;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.search-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--gradient-primary);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.search-box:focus-within {
+  border-color: var(--vibrant-green);
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+}
+
+.search-box:focus-within::before {
+  opacity: 0.05;
+}
+
+.search-input {
+  border: none;
+  background: none;
+  padding: 0.5rem 1rem;
+  outline: none;
+  width: 300px;
+  font-size: 1rem;
+  color: var(--cream-text);
+}
+
+.search-input::placeholder {
+  color: var(--cream-muted);
+  opacity: 0.7;
+}
+
+.search-btn {
+  background: var(--gradient-primary);
+  color: var(--white);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+}
+
+.search-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+}
+
+.search-btn i {
+  font-size: 0.9rem;
+}
+
+.refresh-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.refresh-btn {
+  background: var(--gradient-secondary);
+  color: var(--white);
+  border: none;
+  padding: 0.75rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.refresh-btn:hover:not(:disabled) {
+  transform: scale(1.1);
+  box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
+}
+
+.refresh-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.refresh-btn i {
+  font-size: 1rem;
+}
+
+.last-refresh {
+  color: var(--cream-muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .filter-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.5rem;
+  }
+  
+  .filter-tabs {
+    justify-content: center;
+  }
+  
+  .filter-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+  
+  .search-box {
+    width: 100%;
+  }
+  
+  .search-input {
+    width: 100%;
+    flex: 1;
+  }
+  
+  .refresh-section {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .filter-section {
+    padding: 1.5rem 1rem;
+  }
+  
+  .filter-tabs {
+    gap: 0.25rem;
+  }
+  
+  .filter-tab {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+  
+  .search-box {
+    padding: 0.25rem;
+  }
+  
+  .search-input {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+  }
+  
+  .search-btn {
+    padding: 0.25rem 0.75rem;
+    min-width: 35px;
+    height: 35px;
+  }
+  
+  .refresh-btn {
+    width: 40px;
+    height: 40px;
+    padding: 0.5rem;
+  }
+  
+  .last-refresh {
+    font-size: 0.8rem;
+  }
+}
+
+/* Enhanced focus states for accessibility */
+.filter-tab:focus {
+  outline: 2px solid var(--vibrant-green);
+  outline-offset: 2px;
+}
+
+.search-input:focus {
+  outline: none;
+}
+
+.refresh-btn:focus {
+  outline: 2px solid var(--vibrant-green);
+  outline-offset: 2px;
+}
+
+/* Loading state for search */
+.search-box.loading {
+  position: relative;
+}
+
+.search-box.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 60px;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--cream-border);
+  border-top: 2px solid var(--vibrant-green);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  transform: translateY(-50%);
+}
+
+@keyframes spin {
+  0% { transform: translateY(-50%) rotate(0deg); }
+  100% { transform: translateY(-50%) rotate(360deg); }
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .filter-section {
+  background: var(--cream-bg);
+  border-bottom-color: var(--cream-border);
+}
+
+[data-theme="dark"] .filter-tab {
+  border-color: var(--cream-border);
+  color: var(--cream-text);
+}
+
+[data-theme="dark"] .search-box {
+  background: var(--cream-light);
+}
+
+[data-theme="dark"] .search-input {
+  color: var(--cream-text);
+}
+
+[data-theme="dark"] .search-input::placeholder {
+  color: var(--cream-muted);
+}
+
+[data-theme="dark"] .last-refresh {
+  color: var(--cream-muted);
+}
