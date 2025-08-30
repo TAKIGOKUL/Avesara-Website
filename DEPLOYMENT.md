@@ -15,7 +15,7 @@
 ### 2. Update Homepage URL
 In `package.json`, replace `[your-github-username]` with your actual GitHub username:
 ```json
-"homepage": "https://your-actual-username.github.io/avesara-app"
+"homepage": "https://your-actual-username.github.io/Avesara-Website"
 ```
 
 ### 3. Deploy Your App
@@ -32,7 +32,7 @@ npm run deploy
 
 ### 4. Verify Deployment
 - Wait a few minutes for the deployment to complete
-- Visit `https://your-username.github.io/avesara-app`
+- Visit `https://your-username.github.io/Avesara-Website`
 - Your React app should now be displayed instead of the README
 
 ## Troubleshooting
