@@ -31,7 +31,27 @@ jobs:
         run: npm ci
         
       - name: Build
-        run: npm run build
+        run: |
+          # Set production environment variables
+          export GENERATE_SOURCEMAP=false
+          export REACT_APP_ENVIRONMENT=production
+          npm run build
+        
+      - name: Clean build artifacts
+        run: |
+          cd build
+          # Remove any remaining problematic files
+          find . -name "*.map" -delete
+          find . -name "*.gz" -delete
+          find . -name "*.br" -delete
+          find . -name "*.LICENSE.txt" -delete
+          # Remove any hidden files
+          find . -name ".*" -delete
+          # Ensure clean structure
+          echo "Build contents after cleaning:"
+          ls -la
+          echo "Total size:"
+          du -sh .
         
       - name: Upload artifact
         uses: actions/upload-artifact@v4
