@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -37,36 +37,10 @@ jobs:
           export REACT_APP_ENVIRONMENT=production
           npm run build
         
-      - name: Clean build artifacts
-        run: |
-          cd build
-          # Remove any remaining problematic files
-          find . -name "*.map" -delete
-          find . -name "*.gz" -delete
-          find . -name "*.br" -delete
-          find . -name "*.LICENSE.txt" -delete
-          # Remove any hidden files
-          find . -name ".*" -delete
-          # Ensure clean structure
-          echo "Build contents after cleaning:"
-          ls -la
-          echo "Total size:"
-          du -sh .
-        
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: github-pages
-          path: ./build
-          retention-days: 1
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
       - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
+          force_orphan: true
